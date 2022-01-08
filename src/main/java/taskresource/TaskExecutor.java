@@ -23,7 +23,7 @@ public class TaskExecutor {
 
     public void start() throws InterruptedException {
         int iterations = 0;
-        while(true) {
+        while (true) {
 
             if (iterations == 3) {
                 threadPool.shutdownNow();
@@ -32,11 +32,11 @@ public class TaskExecutor {
             executionCommandBacklog.add(pendingCommandQueue.get());
 
             if (executionCommandBacklog.size() >= 10) {
-               for (int i = 0; i < executionCommandBacklog.size(); ++i) {
-                   threadPool.submit(executionCommandBacklog.remove());
-               }
-               ++iterations;
-               log.info("Submitted commands to thread pool");
+                for (int i = 0; i < executionCommandBacklog.size(); ++i) {
+                    threadPool.submit(executionCommandBacklog.remove());
+                }
+                ++iterations;
+                log.info("Submitted commands to thread pool");
             }
         }
     }
